@@ -11,9 +11,10 @@ public class Account
 
     [Required]
     [RegularExpression(@"^\d{20}$",
-        ErrorMessage = "Номер счёта должен содержать 20 цифр")]
+        ErrorMessage = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 20 пїЅпїЅпїЅпїЅ")]
     public string AccountNumber { get; set; }
     public decimal Balance { get; set; } = 0;
+    public decimal? TransactionLimit { get; set; }
 
     [Required, MaxLength(3)]
     public string Currency { get; set; }
@@ -23,7 +24,8 @@ public class Account
 
     [Required]
     public AccountStatus Status { get; set; }
-    public DateOnly CreatedAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime? LockedUntil { get; set; }
 
     public Guid UserId { get; set; }
 

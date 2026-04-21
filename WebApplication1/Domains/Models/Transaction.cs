@@ -9,7 +9,11 @@ public class Transaction
     [Key]
     public Guid Id { get; set; }
 
-    public string Descrription { get; set; }
+    [MaxLength(500)]
+    public string? Description { get; set; }
+
+    [MaxLength(500)]
+    public string? FailureReason { get; set; }
 
     [Required]
     public decimal Amount { get; set; } = 0;
@@ -23,16 +27,17 @@ public class Transaction
     [Required]
     public TransactionStatus Status { get; set; }
 
-    public DateOnly CreatedAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+    public DateTime? CompletedAt { get; set; }
+
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public Guid FromAccountId { get; set; }
 
-
     [ForeignKey("FromAccountId")]
-    public Account FromAccount { get; set; }
+    public Account? FromAccount { get; set; }
 
     public Guid ToAccountId { get; set; }
 
     [ForeignKey("ToAccountId")]
-    public Account ToAccount { get; set; }
+    public Account? ToAccount { get; set; }
 }

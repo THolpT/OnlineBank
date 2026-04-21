@@ -10,10 +10,10 @@ namespace WebApplication1.Domains
         {
         }
 
-        private DbSet<User> Users { get; set; }
-        private DbSet<Transaction> Transactions { get; set; }
-        private DbSet<Card> Cards { get; set; }
-        private DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<Card> Cards { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
                 => optionsBuilder.UseNpgsql("Name=DefaultConnection");

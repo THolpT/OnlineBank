@@ -11,20 +11,20 @@ public class Card
 
     [Required]
     [RegularExpression(@"^\d{4}-\d{4}-\d{4}-\d{4}$",
-    ErrorMessage = "Формат должен быть XXXX-XXXX-XXXX-XXXX, только цифры")]
+    ErrorMessage = "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ XXXX-XXXX-XXXX-XXXX, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ")]
     public string CardNumber { get; set; }
 
     [Required]
     public DateOnly ExpirationDate { get; set; }
     [Required, MaxLength(3)]
-    public DateOnly CVVHash { get; set; }
+    public string CVVHash { get; set; }
 
     [Required]
     public CardType Type { get; set; }
 
     [Required]
     public CardStatus Status { get; set; }
-    public DateOnly CreatedAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
 
     public Guid AccountId { get; set; }
 
