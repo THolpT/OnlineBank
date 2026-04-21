@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Domains;
+using WebApplication1.Service;
 
 namespace WebApplication1;
 
@@ -14,6 +15,9 @@ public class Program
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IAccountService, AccountService>();
+        builder.Services.AddScoped<ITransactionService, TransactionService>();
 
         var app = builder.Build();
 
@@ -26,6 +30,7 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
+        app.MapControllers();
 
         app.Run();
     }

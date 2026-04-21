@@ -28,7 +28,7 @@ public class User
 
     [Required]
     public UserStatus Status { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     [InverseProperty("User")]
     public ICollection<Account> Accounts { get; set; }

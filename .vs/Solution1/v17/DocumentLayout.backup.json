@@ -1,0 +1,194 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Visual Studio 2010\\asdaw\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|d:\\visual studio 2010\\asdaw\\webapplication1\\service\\itransactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\service\\itransactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|d:\\visual studio 2010\\asdaw\\webapplication1\\service\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\service\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|d:\\visual studio 2010\\asdaw\\webapplication1\\service\\icardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\service\\icardservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|d:\\visual studio 2010\\asdaw\\webapplication1\\service\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\service\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|d:\\visual studio 2010\\asdaw\\webapplication1\\service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\service\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|d:\\visual studio 2010\\asdaw\\webapplication1\\domains\\enums\\transactionstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\domains\\enums\\transactionstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|d:\\visual studio 2010\\asdaw\\webapplication1\\domains\\enums\\transactiontype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\domains\\enums\\transactiontype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|d:\\visual studio 2010\\asdaw\\webapplication1\\domains\\models\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\domains\\models\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|d:\\visual studio 2010\\asdaw\\webapplication1\\domains\\enums\\accounttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\domains\\enums\\accounttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|d:\\visual studio 2010\\asdaw\\webapplication1\\domains\\enums\\accountstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D29D43B9-A935-4082-AC86-018DF01840AD}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\domains\\enums\\accountstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TransactionType.cs",
+              "DocumentMoniker": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Domains\\Enums\\TransactionType.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Domains\\Enums\\TransactionType.cs",
+              "ToolTip": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Domains\\Enums\\TransactionType.cs",
+              "RelativeToolTip": "WebApplication1\\Domains\\Enums\\TransactionType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:12:36.984Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TransactionStatus.cs",
+              "DocumentMoniker": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Domains\\Enums\\TransactionStatus.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Domains\\Enums\\TransactionStatus.cs",
+              "ToolTip": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Domains\\Enums\\TransactionStatus.cs",
+              "RelativeToolTip": "WebApplication1\\Domains\\Enums\\TransactionStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:12:26.925Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AccountStatus.cs",
+              "DocumentMoniker": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Domains\\Enums\\AccountStatus.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Domains\\Enums\\AccountStatus.cs",
+              "ToolTip": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Domains\\Enums\\AccountStatus.cs",
+              "RelativeToolTip": "WebApplication1\\Domains\\Enums\\AccountStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:12:13.635Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AccountType.cs",
+              "DocumentMoniker": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Domains\\Enums\\AccountType.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Domains\\Enums\\AccountType.cs",
+              "ToolTip": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Domains\\Enums\\AccountType.cs",
+              "RelativeToolTip": "WebApplication1\\Domains\\Enums\\AccountType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:12:05.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Transaction.cs",
+              "DocumentMoniker": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Domains\\Models\\Transaction.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Domains\\Models\\Transaction.cs",
+              "ToolTip": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Domains\\Models\\Transaction.cs",
+              "RelativeToolTip": "WebApplication1\\Domains\\Models\\Transaction.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAIwCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:09:19.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ITransactionService.cs",
+              "DocumentMoniker": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Service\\ITransactionService.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Service\\ITransactionService.cs",
+              "ToolTip": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Service\\ITransactionService.cs",
+              "RelativeToolTip": "WebApplication1\\Service\\ITransactionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:01:18.39Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ICardService.cs",
+              "DocumentMoniker": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Service\\ICardService.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Service\\ICardService.cs",
+              "ToolTip": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Service\\ICardService.cs",
+              "RelativeToolTip": "WebApplication1\\Service\\ICardService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:00:50.861Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Service\\UserService.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Service\\UserService.cs",
+              "ToolTip": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Service\\UserService.cs",
+              "RelativeToolTip": "WebApplication1\\Service\\UserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:00:55.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IUserService.cs",
+              "DocumentMoniker": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Service\\IUserService.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Service\\IUserService.cs",
+              "ToolTip": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Service\\IUserService.cs",
+              "RelativeToolTip": "WebApplication1\\Service\\IUserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T05:00:51.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IAccountService.cs",
+              "DocumentMoniker": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Service\\IAccountService.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Service\\IAccountService.cs",
+              "ToolTip": "D:\\Visual Studio 2010\\asdaw\\WebApplication1\\Service\\IAccountService.cs",
+              "RelativeToolTip": "WebApplication1\\Service\\IAccountService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T04:58:17.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

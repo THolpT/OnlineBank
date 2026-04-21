@@ -24,7 +24,7 @@ public class Account
 
     [Required]
     public AccountStatus Status { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? LockedUntil { get; set; }
 
     public Guid UserId { get; set; }
