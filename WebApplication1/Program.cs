@@ -1,3 +1,4 @@
+using System.Text;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Domains;
 using WebApplication1.Service;
@@ -9,6 +10,7 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
         builder.Services.AddAuthorization();
         builder.Services.AddControllers();

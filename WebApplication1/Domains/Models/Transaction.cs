@@ -31,12 +31,12 @@ public class Transaction
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public Guid FromAccountId { get; set; }
+    public Guid? FromAccountId { get; set; }
 
     [ForeignKey("FromAccountId")]
     public Account? FromAccount { get; set; }
 
-    public Guid ToAccountId { get; set; }
+    public Guid? ToAccountId { get; set; }
 
     [ForeignKey("ToAccountId")]
     public Account? ToAccount { get; set; }

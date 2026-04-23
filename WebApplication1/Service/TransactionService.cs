@@ -7,11 +7,13 @@ using WebApplication1.Domains;
 using WebApplication1.Domains.Enums;
 using WebApplication1.Domains.Models;
 using WebApplication1.DTO;
+using WebApplication1.Utils;
 
 namespace WebApplication1.Service
 {
     public class TransactionService : ITransactionService
     {
+        private readonly Converter _converter = new Converter();
         private readonly ApplicationDbContext _context;
 
         public TransactionService(ApplicationDbContext context)
@@ -23,40 +25,98 @@ namespace WebApplication1.Service
         {
             using var dbTransaction = await _context.Database.BeginTransactionAsync();
 
-            var transaction = await _context.Transactions
-                .FirstOrDefaultAsync(t => t.Id == transactionId);
-
-            if (transaction is null)
-                throw new Exception("Транзакция не найдена");
-
-            if (transaction.Status != TransactionStatus.Pending)
-                throw new Exception("Транзакция уже завершена");
-
-            var fromAccount = await _context.Accounts
-                .FirstOrDefaultAsync(a => a.Id == transaction.FromAccountId);
-
-            var toAccount = await _context.Accounts
-                .FirstOrDefaultAsync(a => a.Id == transaction.ToAccountId);
-
-            if (fromAccount is null || toAccount is null)
-                throw new Exception("Один из счетов не найден");
-
-            if (fromAccount.Balance < transaction.Amount)
+            try
             {
-                await FailTransaction(transaction, "Недостаточно средств");
+
+                var transaction = await _context.Transactions
+                    .FirstOrDefaultAsync(t => t.Id == transactionId);
+
+                if (transaction is null)
+                    throw new Exception("Транзакция не найдена");
+
+                if (transaction.Status != TransactionStatus.Pending)
+                    throw new Exception("Транзакция уже завершена");
+
+                var fromAccount = transaction.FromAccountId.HasValue
+                    ? await _context.Accounts.FirstOrDefaultAsync(a => a.Id == transaction.FromAccountId.Value)
+                    : null;
+
+                var toAccount = transaction.ToAccountId.HasValue
+                    ? await _context.Accounts.FirstOrDefaultAsync(a => a.Id == transaction.ToAccountId.Value)
+                    : null;
+                
+                Console.WriteLine($"TYPE: {transaction.Type}");
+                Console.WriteLine($"FROM: {transaction.FromAccountId}");
+                Console.WriteLine($"TO: {transaction.ToAccountId}");
+
+                switch (transaction.Type)
+                {
+                    case TransactionType.Transfer:
+                        if (fromAccount is null || toAccount is null)
+                            throw new Exception("Счета не найдены");
+
+                        var amountFrom = await _converter.ConvertCurrency(transaction.Amount, transaction.Currency,
+                            fromAccount.Currency);
+                        var amountTo = await _converter.ConvertCurrency(transaction.Amount, transaction.Currency,
+                            toAccount.Currency);
+
+                        if (fromAccount.Balance < amountFrom)
+                        {
+                            await FailTransaction(transaction, "Недостаточно средств");
+                            await _context.SaveChangesAsync();
+                            await dbTransaction.CommitAsync();
+                            return;
+                        }
+
+                        fromAccount.Balance -= amountFrom;
+                        toAccount.Balance += amountTo;
+                        break;
+
+                    case TransactionType.Deposit:
+                        if (toAccount is null)
+                            throw new Exception("Счет не найден");
+                        
+                        Console.WriteLine($"AMOUNT: {transaction.Amount}");
+                        Console.WriteLine($"FROM CUR: {transaction.Currency}");
+                        Console.WriteLine($"TO CUR: {toAccount?.Currency}");
+
+                        toAccount.Balance += await _converter.ConvertCurrency(transaction.Amount, transaction.Currency,
+                            toAccount.Currency);
+                        break;
+
+                    case TransactionType.Withdraw:
+                        if (fromAccount is null)
+                            throw new Exception("Счет не найден");
+
+                        var withdrawAmount = await _converter.ConvertCurrency(transaction.Amount, transaction.Currency,
+                            fromAccount.Currency);
+
+                        if (fromAccount.Balance < withdrawAmount)
+                        {
+                            await FailTransaction(transaction, "Недостаточно средств");
+                            await _context.SaveChangesAsync();
+                            await dbTransaction.CommitAsync();
+                            return;
+                        }
+
+                        fromAccount.Balance -= withdrawAmount;
+                        break;
+                }
+
+                if (transaction.Status != TransactionStatus.Failed)
+                {
+                    transaction.Status = TransactionStatus.Completed;
+                    transaction.CompletedAt = DateTime.UtcNow;
+                }
+
                 await _context.SaveChangesAsync();
                 await dbTransaction.CommitAsync();
-                return;
             }
-
-            fromAccount.Balance -= transaction.Amount;
-            toAccount.Balance += transaction.Amount;
-
-            transaction.Status = TransactionStatus.Completed;
-            transaction.CompletedAt = DateTime.UtcNow;
-
-            await _context.SaveChangesAsync();
-            await dbTransaction.CommitAsync();
+            catch (Exception ex)
+            {
+                await dbTransaction.RollbackAsync();
+                throw new Exception($"Transaction failed: {ex.Message}", ex);
+            }
         }
 
         private Task FailTransaction(Transaction transaction, string reason)
@@ -188,9 +248,6 @@ namespace WebApplication1.Service
             if (fromAccount is null || toAccount is null)
                 throw new Exception("Счет не найден");
 
-            if (fromAccount.Currency != currency || toAccount.Currency != currency)
-                throw new Exception("Несовпадение валют");
-
             var transaction = new Transaction
             {
                 Id = Guid.NewGuid(),
@@ -201,6 +258,58 @@ namespace WebApplication1.Service
                 Type = TransactionType.Transfer,
                 FromAccountId = fromAccountId,
                 ToAccountId = toAccountId,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.Transactions.Add(transaction);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Deposit(Guid accountId, decimal amount, string currency, string? description)
+        {
+            if (amount <= 0)
+                throw new Exception("Сумма должна быть больше 0");
+
+            var account = await _context.Accounts.FindAsync(accountId);
+
+            if (account is null)
+                throw new Exception("Счет не найден");
+
+            var transaction = new Transaction
+            {
+                Id = Guid.NewGuid(),
+                Amount = amount,
+                Currency = currency,
+                Description = description,
+                Status = TransactionStatus.Pending,
+                Type = TransactionType.Deposit,
+                ToAccountId = accountId,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.Transactions.Add(transaction);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Withdraw(Guid accountId, decimal amount, string currency, string? description)
+        {
+            if (amount <= 0)
+                throw new Exception("Сумма должна быть больше 0");
+
+            var account = await _context.Accounts.FindAsync(accountId);
+
+            if (account is null)
+                throw new Exception("Счет не найден");
+
+            var transaction = new Transaction
+            {
+                Id = Guid.NewGuid(),
+                Amount = amount,
+                Currency = currency,
+                Description = description,
+                Status = TransactionStatus.Pending,
+                Type = TransactionType.Withdraw,
+                FromAccountId = accountId,
                 CreatedAt = DateTime.UtcNow
             };
 

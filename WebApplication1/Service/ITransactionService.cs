@@ -21,5 +21,9 @@ namespace WebApplication1.Service
             int page = 1,
             int pageSize = 10);
         Task Transfer(Guid fromAccountId, Guid toAccountId, decimal amount, string currency, string? description);
+        
+        Task Deposit(Guid accountId, decimal amount, string currency, string? description);
+        
+        Task Withdraw(Guid accountId, decimal amount, string currency, string? description);
     }
 }

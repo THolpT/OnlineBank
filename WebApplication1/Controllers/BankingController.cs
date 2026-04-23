@@ -27,7 +27,7 @@ namespace WebApplication1.Controllers
         // ==================== USER ENDPOINTS ====================
 
         [HttpPost("users")]
-        public async Task<IActionResult> CreateUser([FromBody] CreateUserDto dto)
+        public async Task<IActionResult> CreateUser([FromQuery] CreateUserDto dto)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPut("users/{userId:guid}")]
-        public async Task<IActionResult> UpdateUser(Guid userId, [FromBody] UpdateUserDto dto)
+        public async Task<IActionResult> UpdateUser(Guid userId, [FromQuery] UpdateUserDto dto)
         {
             var user = await _userService.UpdateAsync(userId, dto);
             if (user == null)
@@ -376,6 +376,42 @@ namespace WebApplication1.Controllers
             catch (Exception ex)
             {
                 return NotFound(new { error = ex.Message });
+            }
+        }
+        
+        [HttpPost("transactions/deposit")]
+        public async Task<IActionResult> Deposit(
+            [FromQuery] Guid accountId,
+            [FromQuery] decimal amount,
+            [FromQuery] string currency,
+            [FromQuery] string? description = null)
+        {
+            try
+            {
+                await _transactionService.Deposit(accountId, amount, currency, description);
+                return Ok(new { message = "Deposit initiated successfully" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+        
+        [HttpPost("transactions/withdraw")]
+        public async Task<IActionResult> Withdraw(
+            [FromQuery] Guid accountId,
+            [FromQuery] decimal amount,
+            [FromQuery] string currency,
+            [FromQuery] string? description = null)
+        {
+            try
+            {
+                await _transactionService.Withdraw(accountId, amount, currency, description);
+                return Ok(new { message = "Withdrawal initiated successfully" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
             }
         }
     }

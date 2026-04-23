@@ -43,14 +43,12 @@ namespace WebApplication1.Service
         {
             throw new ArgumentException($"User with ID {userId} not found");
         }
-
-        // Validate currency
+        
         if (string.IsNullOrWhiteSpace(currency) || currency.Length > 3)
         {
             throw new ArgumentException("Currency must be a valid 3-letter currency code");
         }
-
-        // Generate unique account number (20 digits)
+        
         var accountNumber = await GenerateUniqueAccountNumberAsync();
 
         var account = new Account
@@ -100,7 +98,7 @@ namespace WebApplication1.Service
         }
 
         account.Status = AccountStatus.Frozen;
-        account.LockedUntil = null; // Clear any temporary lock
+        account.LockedUntil = null;
 
         _context.Accounts.Update(account);
         await _context.SaveChangesAsync();
@@ -138,7 +136,6 @@ namespace WebApplication1.Service
             return false;
         }
 
-        // Check if account has any pending transactions or positive balance
         if (account.Balance > 0)
         {
             throw new InvalidOperationException("Cannot close account with positive balance. Please withdraw all funds first.");
@@ -203,7 +200,6 @@ namespace WebApplication1.Service
         return true;
     }
 
-    // Helper method to generate unique 20-digit account number
     private async Task<string> GenerateUniqueAccountNumberAsync()
     {
         string accountNumber;
@@ -211,12 +207,10 @@ namespace WebApplication1.Service
 
         do
         {
-            // Generate 20-digit number (using long to handle 18 digits, plus 2 more digits)
             var first18Digits = _random.NextInt64(100000000000000000, 999999999999999999);
             var last2Digits = _random.Next(10, 99);
             accountNumber = $"{first18Digits}{last2Digits:D2}";
-            
-            // Ensure exactly 20 digits
+
             if (accountNumber.Length > 20)
             {
                 accountNumber = accountNumber[^20..];
