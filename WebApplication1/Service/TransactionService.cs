@@ -27,7 +27,6 @@ namespace WebApplication1.Service
 
             try
             {
-
                 var transaction = await _context.Transactions
                     .FirstOrDefaultAsync(t => t.Id == transactionId);
 
@@ -36,6 +35,9 @@ namespace WebApplication1.Service
 
                 if (transaction.Status != TransactionStatus.Pending)
                     throw new Exception("Транзакция уже завершена");
+                
+                if (transaction.FromAccount.TransactionLimit > transaction.Amount)
+                    throw new Exception("Сумма транзакции не может превышать лимит счёта");
 
                 var fromAccount = transaction.FromAccountId.HasValue
                     ? await _context.Accounts.FirstOrDefaultAsync(a => a.Id == transaction.FromAccountId.Value)
@@ -247,6 +249,9 @@ namespace WebApplication1.Service
 
             if (fromAccount is null || toAccount is null)
                 throw new Exception("Счет не найден");
+            
+            if (fromAccount.TransactionLimit > amount)
+                throw new Exception("Сумма транзакции не может превышать лимит счёта");
 
             var transaction = new Transaction
             {
@@ -300,6 +305,9 @@ namespace WebApplication1.Service
 
             if (account is null)
                 throw new Exception("Счет не найден");
+            
+            if (account.TransactionLimit > amount)
+                throw new Exception("Сумма транзакции не может превышать лимит счёта");
 
             var transaction = new Transaction
             {
