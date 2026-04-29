@@ -20,7 +20,6 @@ namespace WebApplication1.Service
     {
         return await _context.Accounts
             .Include(a => a.User)
-            .Include(a => a.Cards)
             .Include(a => a.ReceivedTransactions)
             .Include(a => a.GivenTransactions)
             .FirstOrDefaultAsync(a => a.Id == accountId);
@@ -30,7 +29,6 @@ namespace WebApplication1.Service
     {
         return await _context.Accounts
             .Where(a => a.UserId == userId)
-            .Include(a => a.Cards)
             .OrderByDescending(a => a.CreatedAt)
             .ToListAsync();
     }

@@ -79,8 +79,7 @@ namespace WebApplication1.Service
 
         return true;
     }
-
-    // 🔐 Простое хэширование (лучше заменить на BCrypt)
+    
     private string HashPassword(string password)
     {
         using var sha256 = SHA256.Create();

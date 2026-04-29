@@ -31,10 +31,7 @@ public class Account
 
     [ForeignKey("UserId")]
     public User User { get; set; }
-
-    [InverseProperty("Account")]
-    public ICollection<Card> Cards { get; set; }
-
+    
     [InverseProperty("ToAccount")]
     public ICollection<Transaction> ReceivedTransactions { get; set; }
 

@@ -24,8 +24,6 @@ namespace WebApplication1.Controllers
             _userService = userService;
         }
 
-        // ==================== USER ENDPOINTS ====================
-
         [HttpPost("users")]
         public async Task<IActionResult> CreateUser([FromQuery] CreateUserDto dto)
         {
@@ -45,7 +43,7 @@ namespace WebApplication1.Controllers
         {
             var user = await _userService.GetByIdAsync(userId);
             if (user == null)
-                return NotFound(new { error = "User not found" });
+                return NotFound(new { error = "Пользователь не найден" });
 
             return Ok(new
             {
@@ -72,7 +70,7 @@ namespace WebApplication1.Controllers
         {
             var user = await _userService.UpdateAsync(userId, dto);
             if (user == null)
-                return NotFound(new { error = "User not found" });
+                return NotFound(new { error = "Пользователь не найден" });
 
             return Ok(new { user.Id, user.FirstName, user.LastName, user.Email, user.Status });
         }
@@ -82,19 +80,17 @@ namespace WebApplication1.Controllers
         {
             var result = await _userService.DeleteAsync(userId);
             if (!result)
-                return NotFound(new { error = "User not found" });
+                return NotFound(new { error = "Пользователь не найден" });
 
             return NoContent();
         }
-
-        // ==================== ACCOUNT ENDPOINTS ====================
 
         [HttpGet("accounts/{accountId:guid}")]
         public async Task<IActionResult> GetAccount(Guid accountId)
         {
             var account = await _accountService.GetByIdAsync(accountId);
             if (account == null)
-                return NotFound(new { error = "Account not found" });
+                return NotFound(new { error = "Счёт не найден" });
 
             return Ok(new
             {
@@ -106,8 +102,7 @@ namespace WebApplication1.Controllers
                 account.Status,
                 account.CreatedAt,
                 account.TransactionLimit,
-                User = new { account.User?.Id, account.User?.Email, account.User?.FirstName, account.User?.LastName },
-                Cards = account.Cards?.Select(c => new { c.Id, c.CardNumber, c.Type, c.Status })
+                User = new { account.User?.Id, account.User?.Email, account.User?.FirstName, account.User?.LastName }
             });
         }
 
@@ -116,7 +111,7 @@ namespace WebApplication1.Controllers
         {
             var user = await _userService.GetByIdAsync(userId);
             if (user == null)
-                return NotFound(new { error = "User not found" });
+                return NotFound(new { error = "Пользователь не найден" });
 
             var accounts = await _accountService.GetUserAccountsAsync(userId);
             return Ok(accounts.Select(a => new
@@ -177,9 +172,9 @@ namespace WebApplication1.Controllers
         {
             var result = await _accountService.BlockAccountAsync(accountId);
             if (!result)
-                return BadRequest(new { error = "Cannot block account. Account may not exist or is already frozen/closed" });
+                return BadRequest(new { error = "Невозможно заблокировать счёт. На данный момент он уже заморожен либо заблокирован." });
 
-            return Ok(new { message = "Account blocked successfully" });
+            return Ok(new { message = "Счёт успешно заблокирован" });
         }
 
         [HttpPost("accounts/{accountId:guid}/unblock")]
@@ -187,9 +182,9 @@ namespace WebApplication1.Controllers
         {
             var result = await _accountService.UnblockAccountAsync(accountId);
             if (!result)
-                return BadRequest(new { error = "Cannot unblock account. Account may not exist or is not frozen" });
+                return BadRequest(new { error = "Невозможно заблокировать счёт. Аккаунт не найден либо уже заморожен" });
 
-            return Ok(new { message = "Account unblocked successfully" });
+            return Ok(new { message = "Счёт успешно разблокирован" });
         }
 
         [HttpPost("accounts/{accountId:guid}/close")]
@@ -199,9 +194,9 @@ namespace WebApplication1.Controllers
             {
                 var result = await _accountService.CloseAccountAsync(accountId);
                 if (!result)
-                    return BadRequest(new { error = "Cannot close account" });
+                    return BadRequest(new { error = "Не удаётся закрыть счёт" });
 
-                return Ok(new { message = "Account closed successfully" });
+                return Ok(new { message = "Счёт закрыт успешно." });
             }
             catch (InvalidOperationException ex)
             {
@@ -216,9 +211,9 @@ namespace WebApplication1.Controllers
             {
                 var result = await _accountService.SetTransactionLimitAsync(accountId, limit);
                 if (!result)
-                    return NotFound(new { error = "Account not found" });
+                    return NotFound(new { error = "Счёт не найден" });
 
-                return Ok(new { message = $"Transaction limit set to {limit}" });
+                return Ok(new { message = $"Лимит транзакций установлен на: {limit}" });
             }
             catch (ArgumentException ex)
             {
@@ -237,17 +232,15 @@ namespace WebApplication1.Controllers
             {
                 var result = await _accountService.RemoveTransactionLimitAsync(accountId);
                 if (!result)
-                    return NotFound(new { error = "Account not found" });
+                    return NotFound(new { error = "Счёт не найден" });
 
-                return Ok(new { message = "Transaction limit removed successfully" });
+                return Ok(new { message = "Лимит транзакций убран успешно" });
             }
             catch (InvalidOperationException ex)
             {
                 return BadRequest(new { error = ex.Message });
             }
         }
-
-        // ==================== TRANSACTION ENDPOINTS ====================
 
         [HttpPost("transactions/transfer")]
         public async Task<IActionResult> Transfer(
@@ -260,7 +253,7 @@ namespace WebApplication1.Controllers
             try
             {
                 await _transactionService.Transfer(fromAccountId, toAccountId, amount, currency, description);
-                return Ok(new { message = "Transfer initiated successfully" });
+                return Ok(new { message = "Перевод инициализировался" });
             }
             catch (Exception ex)
             {
@@ -274,7 +267,7 @@ namespace WebApplication1.Controllers
             try
             {
                 await _transactionService.CompleteTransaction(transactionId);
-                return Ok(new { message = "Transaction completed successfully" });
+                return Ok(new { message = "Транзакция успешно закончена." });
             }
             catch (Exception ex)
             {
@@ -289,9 +282,9 @@ namespace WebApplication1.Controllers
             {
                 var result = await _transactionService.CancelTransaction(transactionId);
                 if (!result)
-                    return BadRequest(new { error = "Cannot cancel transaction" });
+                    return BadRequest(new { error = "Нельзя отменить транзакцию" });
 
-                return Ok(new { message = "Transaction cancelled successfully" });
+                return Ok(new { message = "Транзакция успешно отменена" });
             }
             catch (Exception ex)
             {
@@ -389,7 +382,7 @@ namespace WebApplication1.Controllers
             try
             {
                 await _transactionService.Deposit(accountId, amount, currency, description);
-                return Ok(new { message = "Deposit initiated successfully" });
+                return Ok(new { message = "Депозит инициализирован успешно" });
             }
             catch (Exception ex)
             {
@@ -407,7 +400,7 @@ namespace WebApplication1.Controllers
             try
             {
                 await _transactionService.Withdraw(accountId, amount, currency, description);
-                return Ok(new { message = "Withdrawal initiated successfully" });
+                return Ok(new { message = "Снятие инициализировано успешно" });
             }
             catch (Exception ex)
             {
